@@ -9,32 +9,39 @@
     <title>Library</title>
 </head>
 <body>
-
     <button class="user-input" id="user-input">Add book to library</button>
     
-    <form id="formElement" style="display: none;">
-        <p>Add your new book :</p>
-        <div class="bookTitle">
-            <label for="bookTitle">Title</label>
-            <input type="text" id="bookTitle" name="bookTitle" required>
-        </div>
-        <div class="bookAuthor">
-            <label for="bookAuthor">Author</label>
-            <input type="text" id="bookAuthor" name="bookAuthor" required>
-        </div>
-        <div class="pagesNumber">
-            <label for="pagesNumber">Number of pages</label>
-            <input type="number" name="pagesNumber" id="pagesNumber" required>
-        </div>
-        <div class="status">
-                <label for="isRead">Read ?</label>
-                <input type="checkbox" id="isRead" name="status" required>
+    <div class="form-popup" id="myForm">
+        <form id="formElement" class="form-container">
+            <div class="bookTitle">
+                <label for="bookTitle">Title</label>
+                <input type="text" id="bookTitle" name="bookTitle" required="required">
             </div>
-        <div class="sendBook">
-            <button type="button" class="send-input" id="send-input">
-            </button>
-        </div>
-    </form>
+            <div class="bookAuthor">
+                <label for="bookAuthor">Author</label>
+                <input type="text" id="bookAuthor" name="bookAuthor" required="required">
+            </div>
+            <div class="pagesNumber">
+                <label for="pagesNumber">Number of pages</label>
+                <input type="number" name="pagesNumber" id="pagesNumber" required="required">
+            </div>
+            <div class="status">
+                    <label for="isRead">Read ?</label>
+                    <input type="checkbox" id="isRead" name="status">
+                </div>
+            <div class="sendBook">
+                <button type="button" class="send-input" id="send-input">Add your book
+                </button>
+            </div>
+            <div class="cancel">
+                <button type="button" class="cancel-input" id="cancel-input">Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="book-container" id="book-container">
+    </div>
 
 </body>
 
