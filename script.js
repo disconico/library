@@ -123,19 +123,28 @@ defaultBook('titleE', 'authorE', '47', false)
 
 const deleteBtn = document.querySelectorAll('.delete-button')
 deleteBtn.forEach(button => button.addEventListener('click', deleteBook))
+// deleteBtn.forEach(button => button.addEventListener('click', setBookId))
+deleteBtn.forEach(button => button.addEventListener('click', coucou))
 
 function coucou () {
     console.log("coucou")
 }
 
+
+
 function deleteBook (e) {
-    let x
-    x = e.target.id
-    console.log(typeof(x))
-   myLibrary.splice(Number(x), 1)
+indexOfBook = e.target.parentNode.id
+myLibrary.splice(indexOfBook, 1)
+bookContainer.removeChild(e.target.parentNode)
+console.log(myLibrary)
 }
 
-// function deleteBook () {
-//     myLibrary.shift()
-// }
 
+
+function updateLibrary () {
+    const bookContainer = document.getElementById('book-container')
+    bookContainer.forEach(element => {
+        // const indexOfBook = myLibrary.indexOf(element)
+        element.setAttribute('id', '2')
+    })
+}
