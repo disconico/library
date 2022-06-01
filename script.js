@@ -31,7 +31,7 @@ let newBook;
 function addBookToLibrary(title, author, pages, isRead) {
     newBook = new Book(title, author, pages, isRead)
     myLibrary.push(newBook)
-    console.table(myLibrary)
+    setData()
     render()
     form.reset()
 }    
@@ -56,6 +56,7 @@ function createBook(item) {
     const newBookPages = document.createElement('div')
     const newBookStatus = document.createElement('button')
     const newBookDelete = document.createElement('button')
+    const newBookEdit = document.createElement('button')
     
     bookDiv.classList.add('book')
     bookDiv.setAttribute("id", myLibrary.indexOf(item))
@@ -94,6 +95,7 @@ function createBook(item) {
 
     newBookDelete.addEventListener('click', () => {
         myLibrary.splice(myLibrary.indexOf(item), 1)
+        setData()
         render()
     })
 
@@ -103,6 +105,7 @@ function createBook(item) {
         } else {
             item.isRead = true
         }
+        setData()
         render()
     })
 }
@@ -130,20 +133,32 @@ class Book2 {
     constructor (title, author, pages, isRead) {
         this.title = title
         this.author = author
-        this.pages = pages
+        this.pages = pages + ' pages'
         this.isRead = isRead
     }
 }
 
-let A = new Book2('titleA', 'authorA', '123', true)
+let A = new Book2("Harry Potter and the Philosopher's Stone", 'J.K. Rowling', '352', true)
 myLibrary.push(A)
-let B = new Book2('titleB', 'authorB', '456', false)
+let B = new Book2('The Art Of War', 'Sun Tzu', '62', false)
 myLibrary.push(B)
-let C = new Book2('titleC', 'authorC', '416', false)
-myLibrary.push(C)
-let D = new Book2('titleD', 'authorD', '12', true)
-myLibrary.push(D)
-let E = new Book2('titleE', 'authorE', '47', false)
-myLibrary.push(E)
-console.table(myLibrary)
 render()
+
+//Setting library to be stored in local storage
+function setData() {
+    localStorage.setItem(`myLibrary`, JSON.stringify(myLibrary));
+}
+
+//pulls books from local storage when page is refreshed
+function restore (){
+if(!localStorage.myLibrary) {
+    render();
+}else {
+    let objects = localStorage.getItem('myLibrary') // gets information from local storage to use in below loop to create DOM/display
+    objects = JSON.parse(objects);
+    myLibrary = objects;
+    render();
+}
+}
+
+restore()
