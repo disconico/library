@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,42 +9,53 @@
     <script src="./script.js" defer></script>
     <title>Library</title>
 </head>
+
 <body>
 
-    <h1 class="library-title">My library</h1>
+    <div class="main-container">
+        <div class="header">
+            <div class="first-row">
+                <h1 class="library-title">My library</h1>
+            </div>
+            <div class="second-row">
+                <button class="user-input" id="user-input">Add book to library</button>
+                <button class="remove-all" id="remove-all">Remove all books</button>
+            </div>
+        </div>
 
-    <button class="user-input" id="user-input">Add book to library</button>
-    
-    <div class="form-popup" id="myForm">
-        <form id="form" class="form-container">
-            <div class="bookTitle">
-                <label for="title">Title</label>
-                <input type="text" id="title" name="title" required="required">
-            </div>
-            <div class="author">
-                <label for="author">Author</label>
-                <input type="text" id="author" name="author" required="required">
-            </div>
-            <div class="pages">
-                <label for="pages">Number of pages</label>
-                <input type="number" name="pages" id="pages" required="required">
-            </div>
-            <div class="status">
-                    <label for="isRead">Read ?</label>
+        <div class="form-popup" id="myForm">
+            <form id="form" class="form-container">
+                <h3>Add New Book</h3>
+                <div class="bookTitle">
+                    <label for="title">Title *</label>
+                    <input type="text" id="title" name="title" required placeholder="Book title">
+                </div>
+                <div class="author">
+                    <label for="author">Author *</label>
+                    <input type="text" id="author" name="author" required placeholder="Book author">
+                </div>
+                <div class="pages">
+                    <label for="pages">Number of pages *</label>
+                    <input type="number" name="pages" id="pages" required placeholder="Number of pages">
+                </div>
+                <div class="status">
+                    <label for="isRead">The book is read :</label>
                     <input type="checkbox" id="isRead" name="status">
                 </div>
-            <div class="sendBook">
-                <button type="button" class="send-input" id="send-input">Add your book
-                </button>
-            </div>
-            <div class="cancel">
-                <button type="button" class="cancel-input" id="cancel-input">Cancel
-                </button>
-            </div>
-        </form>
-    </div>
-
-    <div class="book-container" id="book-container">
+                <div class="form-buttons">
+                    <div class="sendBook">
+                        <button type="submit" class="send-input" id="send-input" form="form">Add your book
+                        </button>
+                    </div>
+                    <div class="cancel">
+                        <button type="button" class="cancel-input" id="cancel-input">Cancel
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="book-container" id="book-container">
+        </div>
     </div>
 
 </body>

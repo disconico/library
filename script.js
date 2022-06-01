@@ -3,6 +3,7 @@ const inputBtn = document.getElementById('user-input')
 const sendBtn = document.getElementById('send-input')
 const cancelBtn = document.getElementById('cancel-input')
 const deleteBtn = document.querySelectorAll('.delete-button')
+const removeAllBtn = document.getElementById('remove-all')
 const form = document.querySelector('form')
 
 //Buttons events
@@ -11,6 +12,7 @@ sendBtn.addEventListener('click', addBookToLibrary)
 sendBtn.addEventListener('click', hideRequest)
 cancelBtn.addEventListener('click', hideRequest)
 cancelBtn.addEventListener('click', formReset)
+removeAllBtn.addEventListener('click', clearAll)
 
 //Book constructor
 class Book {
@@ -74,9 +76,11 @@ function createBook(item) {
     if (item.isRead === true) {
         newBookStatus.textContent = 'Read'
         newBookStatus.classList.add('Read')
+        bookDiv.style.borderLeft = '8px solid green'
     } else {
         newBookStatus.textContent = 'Not read'
         newBookStatus.classList.add('Not-read')
+        bookDiv.style.borderLeft = '8px solid red'
     }
     newBookStatus.setAttribute('id', 'status')
     bookDiv.appendChild(newBookStatus)
@@ -103,6 +107,7 @@ function createBook(item) {
     })
 }
 
+// Others functions
 function formReset () {
     return form.reset()
 }
@@ -115,8 +120,9 @@ function hideRequest () {
     document.getElementById('myForm').style.display = 'none';   
 }
 
-function showBooks () {
-    myLibrary.forEach(Element => console.table(Element))
+function clearAll () {
+   myLibrary = []
+   render()
 }
 
 //Add default books

@@ -1,5 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+@font-face {
+  font-family: "my-cool-helvetica";
+  src: url(./fonts/HelveticaNeue.ttc);
+}
+
+@font-face {
+  font-family: "my-cool-SF";
+  src: url(./fonts/San\ Francisco\ Regular.ttf);
+}
+
+@font-face {
+  font-family: "my-cool-SF-strong";
+  src: url(./fonts/San\ Francisco\ Bold.ttf);
+}
+
+:root {
+  /* --dashboard-color : #313A46;
+  --main-side-color :#f59e0b; */
+  --text-color-main : #1f2937;
+  --text-color-light : #f1f5f9;
+  --bar-color : #e2e8f0;
+}
+
 /* All divisions */
 html, body {
     width: 100%;
@@ -9,22 +32,89 @@ html, body {
 
 * {
     box-sizing: border-box;
+}
 
+html {
+  background: url(./library.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'my-cool-SF', sans-serif;
+    font-size: 14px;
     margin: 0;
     padding: 0;
-    background-color: rgb(61, 157, 189);
-    color: rgb(8, 8, 66);
+
+    color : var(--text-color-main);
     position: relative;
+
 }
+
+h1 {
+  font-family: 'my-cool-SF-strong', sans-serif;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin-left: auto;
+    margin-right: auto;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    border-radius: 10px;
+    width: 80%;
+    height: 90%;
+    /* padding: 10px; */
+    box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.902);
+    
+    
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.header .second-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap : 20px
+}
+
 
 /* Book container */
 .book-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, 300px);
+  gap: 10px;
+  overflow: auto;
+  padding: 10px;
+  margin: 10px;
+}
+
+/* Book */
+.book {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 16px;
+  box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  gap: 6px;
+}
+
+.book .read {
+  border-left: 10px solid green;
 }
 
 /* Input form */
@@ -45,6 +135,11 @@ body {
     padding: 10px;
     background-color: white;
   }
+  
+.form-container h3 {
+  text-align: center;
+  font-family: 'my-cool-SF-strong';
+}
 
   .form-container input {
       width: 100%;
@@ -52,23 +147,52 @@ body {
       margin: 10px 0 10px 0;
       border: none;
       background: #f1f1f1;
+      border-radius: 4px;
+  }
+
+  .form-container label {
+    margin-left: 8px;
   }
 
   .form-container input:focus {
-    background-color: #ddd;
+    background-color: var(--text-color-light);
     border : 2px solid blue;
     outline: none;
   }
 
+.form-container .status {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.form-container .status label {
+  width: 200%;
+}
+
+#isRead {
+width: auto;
+margin-right: 5px;
+}
+
+
   .form-container button {
     background-color: #04AA6D;
     color: white;
-    padding: 16px 20px;
+    padding: 8px 10px;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 120px;
     margin-bottom:10px;
+    margin-top: 10px;
     opacity: 0.8;
+  }
+
+  .form-buttons {
+    display: flex;
+    gap : 8px;
+    justify-content: center;
+    
   }
 
   .form-container .cancel button {
@@ -79,7 +203,7 @@ body {
       opacity: 1;
   }
 
-  .items{
+  /* .items{
     margin-top:10px;
     width:20px;
     height:20px;
@@ -88,4 +212,8 @@ body {
 
 .items:nth-child(1){ background:gold; }
 .items:nth-child(2){ background:green; }
+ */
 
+button {
+  font-family: 'my-cool-SF', sans-serif;
+}
