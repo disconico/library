@@ -21,6 +21,12 @@ body {
     position: relative;
 }
 
+/* Book container */
+.book-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
 /* Input form */
 .form-popup {
     display: none;
@@ -82,3 +88,4 @@ body {
 
 .items:nth-child(1){ background:gold; }
 .items:nth-child(2){ background:green; }
+

@@ -2,10 +2,8 @@
 const inputBtn = document.getElementById('user-input')
 const sendBtn = document.getElementById('send-input')
 const cancelBtn = document.getElementById('cancel-input')
+const deleteBtn = document.querySelectorAll('.delete-button')
 const form = document.querySelector('form')
-const bookContainer = document.getElementById('book-container')
-
-
 
 //Buttons events
 inputBtn.addEventListener('click', showRequest)
@@ -14,55 +12,95 @@ sendBtn.addEventListener('click', hideRequest)
 cancelBtn.addEventListener('click', hideRequest)
 cancelBtn.addEventListener('click', formReset)
 
-
-// Main functions 
-let myLibrary = [];
-
+//Book constructor
 class Book {
     constructor (title, author, pages, isRead) {
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.isRead = isRead;
+        this.title = form.title.value;
+        this.author = form.author.value;
+        this.pages = form.pages.value + "pages";
+        this.isRead = form.isRead.checked;
     }
 }
 
-function addBookToLibrary() {
-    const title = document.getElementById('bookTitle').value
-    const author = document.getElementById('bookAuthor').value
-    const pages = document.getElementById('pagesNumber').value
-    const isRead = document.getElementById('isRead').checked
-    const book = new Book(title, author, pages, isRead)
-    
+//creates book from Book Constructor, adds to library
+let myLibrary = [];
+let newBook;
 
+function addBookToLibrary(title, author, pages, isRead) {
+    newBook = new Book(title, author, pages, isRead)
+    myLibrary.push(newBook)
+    console.table(myLibrary)
+    render()
+    form.reset()
+}    
+
+// Create book visual in browser
+function render () {
+    const bookContainer = document.getElementById('book-container')
+    const books = document.querySelectorAll('.book')
+    books.forEach(book => bookContainer.removeChild(book))
+
+    for (let i = 0; i < myLibrary.length; i++){
+        createBook(myLibrary[i])
+    }
+}
+
+// Create book DOM elements
+function createBook(item) {
+    const library = document.querySelector('#book-container')
+    const bookDiv = document.createElement('div')
+    const newBookTitle = document.createElement('div')
+    const newBookAuthor = document.createElement('div')
+    const newBookPages = document.createElement('div')
+    const newBookStatus = document.createElement('button')
+    const newBookDelete = document.createElement('button')
     
-    let newBook = document.createElement('div')
-    newBook.setAttribute("class", "book")
-    newBook.setAttribute("id", myLibrary.length)
-    console.log(myLibrary.length)
-    let newBookTitle = document.createElement('p')
-    newBookTitle.innerText = title
-    newBook.appendChild(newBookTitle)
-    let newBookAuthor = document.createElement('p')
-    newBookAuthor.innerText = author
-    newBook.appendChild(newBookAuthor)
-    let newBookPages = document.createElement('p')
-    newBookPages.innerText = pages
-    newBook.appendChild(newBookPages)
-    let newBookStatus = document.createElement('p')
-    newBookStatus.innerText = isRead
-    newBook.appendChild(newBookStatus)
-    let newBookDelete = document.createElement('button')
-    newBookDelete.innerText = "Delete this book"
+    bookDiv.classList.add('book')
+    bookDiv.setAttribute("id", myLibrary.indexOf(item))
+    
+    newBookTitle.classList.add('title')
+    newBookTitle.textContent = item.title
+    bookDiv.appendChild(newBookTitle)
+    
+    newBookAuthor.classList.add('author')
+    newBookAuthor.textContent = item.author
+    bookDiv.appendChild(newBookAuthor)
+    
+    newBookPages.classList.add('pages')
+    newBookPages.textContent = item.pages
+    bookDiv.appendChild(newBookPages)
+    
+    newBookStatus.classList.add('status')
+    if (item.isRead === true) {
+        newBookStatus.textContent = 'Read'
+        newBookStatus.classList.add('Read')
+    } else {
+        newBookStatus.textContent = 'Not read'
+        newBookStatus.classList.add('Not-read')
+    }
+    newBookStatus.setAttribute('id', 'status')
+    bookDiv.appendChild(newBookStatus)
+    
+    newBookDelete.classList.add('delete-button')
+    newBookDelete.textContent = "Remove"
     newBookDelete.setAttribute("id", "delete-button")
-    newBook.appendChild(newBookDelete)
+    bookDiv.appendChild(newBookDelete)
 
-    bookContainer.appendChild(newBook)
+    library.appendChild(bookDiv)
 
-    myLibrary.push(book)
-    // showBooks()
-    console.log(myLibrary)
-    formReset()
+    newBookDelete.addEventListener('click', () => {
+        myLibrary.splice(myLibrary.indexOf(item), 1)
+        render()
+    })
+
+    newBookStatus.addEventListener('click', () => {
+        if ( item.isRead === true) {
+            item.isRead = false
+        } else {
+            item.isRead = true
+        }
+        render()
+    })
 }
 
 function formReset () {
@@ -81,70 +119,25 @@ function showBooks () {
     myLibrary.forEach(Element => console.table(Element))
 }
 
-
-
-// Add default books
-function defaultBook (title, author, pages, isRead) {
-    const book = new Book(title, author, pages, isRead)
-    let newBook = document.createElement('div')
-    newBook.setAttribute("class", "book")
-    newBook.setAttribute("id", myLibrary.length)
-    console.log(myLibrary.length)
-    let newBookTitle = document.createElement('p')
-    newBookTitle.innerText = title
-    newBook.appendChild(newBookTitle)
-    let newBookAuthor = document.createElement('p')
-    newBookAuthor.innerText = author
-    newBook.appendChild(newBookAuthor)
-    let newBookPages = document.createElement('p')
-    newBookPages.innerText = pages
-    newBook.appendChild(newBookPages)
-    let newBookStatus = document.createElement('p')
-    newBookStatus.innerText = isRead
-    newBook.appendChild(newBookStatus)
-    let newBookDelete = document.createElement('button')
-    newBookDelete.innerText = "Delete this book"
-    newBookDelete.setAttribute("id", "delete-button")
-    newBookDelete.setAttribute("class", "delete-button")
-    newBookDelete.setAttribute("type", "button")
-    newBook.appendChild(newBookDelete)
-
-    bookContainer.appendChild(newBook)
-    myLibrary.push(book)
-    console.log(myLibrary)
+//Add default books
+class Book2 {
+    constructor (title, author, pages, isRead) {
+        this.title = title
+        this.author = author
+        this.pages = pages
+        this.isRead = isRead
+    }
 }
 
-defaultBook('titleA', 'authorA', '123', true)
-defaultBook('titleB', 'authorB', '456', false)
-defaultBook('titleC', 'authorC', '416', false)
-defaultBook('titleD', 'authorD', '12', true)
-defaultBook('titleE', 'authorE', '47', false)
-
-
-const deleteBtn = document.querySelectorAll('.delete-button')
-deleteBtn.forEach(button => button.addEventListener('click', deleteBook))
-// deleteBtn.forEach(button => button.addEventListener('click', setBookId))
-deleteBtn.forEach(button => button.addEventListener('click', coucou))
-
-function coucou () {
-    console.log("coucou")
-}
-
-
-
-function deleteBook (e) {
-indexOfBook = e.target.parentNode.id
-myLibrary.splice(indexOfBook, 1)
-bookContainer.removeChild(e.target.parentNode)
-console.log(myLibrary)
-}
-
-
-
-function updateLibrary () {
-    const bookContainer = document.getElementById('book-container')
-    bookContainer.forEach(element => {
-        // const indexOfBook = myLibrary.indexOf(element)
-        element.setAttribute('id', '2')
-    })
-}
+let A = new Book2('titleA', 'authorA', '123', true)
+myLibrary.push(A)
+let B = new Book2('titleB', 'authorB', '456', false)
+myLibrary.push(B)
+let C = new Book2('titleC', 'authorC', '416', false)
+myLibrary.push(C)
+let D = new Book2('titleD', 'authorD', '12', true)
+myLibrary.push(D)
+let E = new Book2('titleE', 'authorE', '47', false)
+myLibrary.push(E)
+console.table(myLibrary)
+render()
