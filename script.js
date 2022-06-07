@@ -1,3 +1,4 @@
+(function () {
 //Assign all elements
 const inputBtn = document.getElementById('user-input')
 const sendBtn = document.getElementById('send-input')
@@ -19,7 +20,7 @@ class Book {
     constructor (title, author, pages, isRead) {
         this.title = form.title.value;
         this.author = form.author.value;
-        this.pages = form.pages.value + "pages";
+        this.pages = form.pages.value + " pages";
         this.isRead = form.isRead.checked;
     }
 }
@@ -162,3 +163,5 @@ if(!localStorage.myLibrary) {
 }
 
 restore()
+
+})()
